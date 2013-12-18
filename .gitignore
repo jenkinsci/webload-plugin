@@ -5,3 +5,5 @@
 target
 work
 /bin
+release.properties
+run.bat
