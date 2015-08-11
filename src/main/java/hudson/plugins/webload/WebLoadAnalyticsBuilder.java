@@ -129,7 +129,7 @@ public class WebLoadAnalyticsBuilder extends Builder /*Recorder*/ {
         if (compareToSessions != null && !compareToSessions.isEmpty()) {
             String[] splitSessions = compareToSessions.split(",");
             for (String s : splitSessions) {
-                FilePath compareSessionFilePath = new FilePath(build.getWorkspace(), s);
+                FilePath compareSessionFilePath = new FilePath(build.getWorkspace(), build.getEnvironment(listener).expand(s));
                 if (compareSessionFilePath.exists()) {
                     sessionsToCompare.add(compareSessionFilePath);
                     listener.getLogger().println("Add LS for comparison " + compareSessionFilePath);
