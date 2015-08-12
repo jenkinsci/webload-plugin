@@ -130,8 +130,8 @@ public class WebLoadAnalyticsBuilder extends Builder /*Recorder*/ {
             String[] splitSessions = compareToSessions.split(",");
             for (String s : splitSessions) {
                 FilePath compareSessionFilePath = new FilePath(build.getWorkspace(), build.getEnvironment(listener).expand(s));
+				sessionsToCompare.add(compareSessionFilePath);
                 if (compareSessionFilePath.exists()) {
-                    sessionsToCompare.add(compareSessionFilePath);
                     listener.getLogger().println("Add LS for comparison " + compareSessionFilePath);
                 } else {
                     listener.getLogger().println("WARN : LS for comparison not found " + compareSessionFilePath);
