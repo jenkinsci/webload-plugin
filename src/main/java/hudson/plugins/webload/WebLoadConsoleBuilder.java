@@ -187,7 +187,11 @@ public class WebLoadConsoleBuilder extends Builder {
             listener.getLogger().println("Archiving " + f);
             files.put(f, f);
         }
-        build.pickArtifactManager().archive(workspace, launcher, listener, files);
+        try {
+			build.pickArtifactManager().archive(workspace, launcher, listener, files);
+		} catch (IOException e1) {
+			listener.getLogger().println("Error archiving files: " + e1.getLocalizedMessage());
+		}
 
         
         return (result==0);
