@@ -7,3 +7,6 @@ work
 /bin
 release.properties
 run.bat
+pom.xml.releaseBackup
+test.cmd
+publish_release.cmd
