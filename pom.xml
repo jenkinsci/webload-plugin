@@ -9,7 +9,7 @@
 
   <groupId>hudson.plugins</groupId>
   <artifactId>webload</artifactId>
-  <version>1.1</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>hpi</packaging>
   <name>WebLOAD Load Testing Plugin</name>
   <description>WebLOAD Load Testing Jenkins plugin</description>
