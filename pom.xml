@@ -9,7 +9,7 @@
 
   <groupId>hudson.plugins</groupId>
   <artifactId>webload</artifactId>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.1</version>
   <packaging>hpi</packaging>
   <name>WebLOAD Load Testing Plugin</name>
   <description>WebLOAD Load Testing Jenkins plugin</description>
@@ -25,7 +25,7 @@
     <connection>scm:git:ssh://github.com/jenkinsci/webload-plugin.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/jenkinsci/webload-plugin.git</developerConnection>
     <url>https://github.com/jenkinsci/webload-plugin</url>
-    <tag>HEAD</tag>
+    <tag>webload-1.1</tag>
   </scm>
   
   <developers>
