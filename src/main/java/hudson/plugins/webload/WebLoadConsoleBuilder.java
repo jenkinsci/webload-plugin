@@ -179,20 +179,23 @@ public class WebLoadConsoleBuilder extends Builder {
             throw new AbortException("WebLOADO session ended unexpectedely. Load Session file not created");
         }
         //TODO:if (archiveSessionFile)
-        Map<String, String> files = new HashMap<String, String>();
-        for (String e : sessionExtensions) {
-            String f = replaceExtension(lsFileName, e);
-            f = f.replace(File.separatorChar, '/');
-            
-            listener.getLogger().println("Archiving " + f);
-            files.put(f, f);
+        if (new File(lsFileName).isAbsolute()) {
+        	listener.getLogger().println("Not archiving from absolute path");
+        } else {
+	        Map<String, String> files = new HashMap<String, String>();
+	        for (String e : sessionExtensions) {
+	            String f = replaceExtension(lsFileName, e);
+	            f = f.replace(File.separatorChar, '/');
+	            
+	            listener.getLogger().println("Archiving " + f);
+	            files.put(f, f);
+	        }
+	        try {
+				build.pickArtifactManager().archive(workspace, launcher, listener, files);
+			} catch (IOException e1) {
+				listener.getLogger().println("Error archiving files: " + e1.getLocalizedMessage());
+			}
         }
-        try {
-			build.pickArtifactManager().archive(workspace, launcher, listener, files);
-		} catch (IOException e1) {
-			listener.getLogger().println("Error archiving files: " + e1.getLocalizedMessage());
-		}
-
         
         return (result==0);
     }
