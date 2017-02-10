@@ -88,28 +88,35 @@ public class WebLoadAnalyticsBuilder extends Builder /*Recorder*/ {
     
         @Override
     public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener) throws InterruptedException, IOException {
-        ArgumentListBuilder args = new ArgumentListBuilder();
-                EnvVars envVars = build.getEnvironment(listener);
-                // on Windows environment variables are converted to all upper case,
-                // but no such conversions are done on Unix, so to make this cross-platform,
-                // convert variables to all upper cases.
-                for(Map.Entry<String,String> e : build.getBuildVariables().entrySet())
-                    envVars.put(e.getKey(),e.getValue());
-        
-        
-        String path = getDescriptor().getWebloadInstallationPath();
-        if ((path==null) || path.length()==0) {
-            String programFile = envVars.get("ProgramFiles(x86)");
-            if (programFile==null) {
-                programFile = envVars.get("ProgramFiles");
-            }
-            if (programFile==null) {
-                
-                programFile = "C:\\Program Files";
-            }
-            path = programFile + "\\RadView\\WebLOAD";
-            listener.getLogger().println("WebLOAD Installation path not specified, guessed:" + path);
-        }
+		ArgumentListBuilder args = new ArgumentListBuilder();
+		EnvVars envVars = build.getEnvironment(listener);
+		// on Windows environment variables are converted to all upper case,
+		// but no such conversions are done on Unix, so to make this
+		// cross-platform,
+		// convert variables to all upper cases.
+		for (Map.Entry<String, String> e : build.getBuildVariables().entrySet())
+			envVars.put(e.getKey(), e.getValue());
+
+		String path = envVars.get("WL_HOME");
+		if ((path != null) && path.length() > 0) {
+			listener.getLogger().println("Using WL_HOME:" + path);
+		} else {
+			path = getDescriptor().getWebloadInstallationPath();
+			if ((path != null) && path.length() > 0) {
+				listener.getLogger().println("Using WebloadInstallationPath:" + path);
+			} else {
+				String programFile = envVars.get("ProgramFiles(x86)");
+				if (programFile == null) {
+					programFile = envVars.get("ProgramFiles");
+				}
+				if (programFile == null) {
+					programFile = "C:\\Program Files";
+				}
+				path = programFile + "\\RadView\\WebLOAD";
+				// listener.getLogger().println("WebLOAD Installation path not
+				// specified, guessed:" + path);
+			}
+		}
         //File binDir = new File(path,"bin");
         String execName = "WLAnalyticsCmd.exe";
         String analyticsExecPath = path + "\\bin\\" + execName;
