@@ -246,6 +246,7 @@ public class WebLoadAnalyticsBuilder extends Builder /*Recorder*/ {
         public boolean configure(StaplerRequest req, JSONObject formData) throws Descriptor.FormException {
             // To persist global configuration information,
             // set that to properties and call save().
+        	formData = formData.getJSONObject("webload");
             webloadInstallationPath = formData.getString("webloadInstallationPath");
             // ^Can also use req.bindJSON(this, formData);
             //  (easier when there are many fields; need set* methods for this, like setUseFrench)
