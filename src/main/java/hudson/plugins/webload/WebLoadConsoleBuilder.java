@@ -122,6 +122,8 @@ public class WebLoadConsoleBuilder extends Builder {
         if (tplFile == null || tplFile.isEmpty()) {
             throw new AbortException("Template file not specified");
         }
+        String tplFileName = envVars.expand(tplFile);
+        
         String lsFileName = lsFile;
         if (lsFileName == null || lsFileName.isEmpty()) {
             lsFileName = tplFile;
@@ -144,7 +146,7 @@ public class WebLoadConsoleBuilder extends Builder {
         }
         
         args.add(webloadExecPath); //webloadFile);
-        args.add(tplFile);
+        args.add(tplFileName);
         args.add(lsFilePath);
         if (virtualClients > 0) {
             args.add("/vc");
