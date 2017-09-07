@@ -179,8 +179,10 @@ public class WebLoadConsoleBuilder extends Builder {
         String errorDescription = extractValue("ErrorDescription=\"","\"", r );
         listener.getLogger().println("SessionReturnCode " + sessionReturnCode);
         listener.getLogger().println("ErrorDescription " + errorDescription);
+		listener.getLogger().println("result " + result);
         
         if ( ! ("Passed".equalsIgnoreCase(sessionReturnCode)) ) {
+			listener.getLogger().println("Not passed, marking as UNSTABLE");
             build.setResult(Result.UNSTABLE);
         }
 
